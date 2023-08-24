@@ -1,17 +1,23 @@
-class App{
+class App {
   constructor() {
     this.connectWallet();
   }
 
   connectWallet() {
-    const connectBtn = document.getElementById('connectBtn');
-    const account = document.getElementById('account');
+    const connectBtn = document.getElementById("connectBtn");
+    const account = document.getElementById("account");
     connectBtn.onclick = async () => {
-      const accountHash = await window.ethereum.request({method: 'eth_requestAccounts'});
+      const accountHash = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
       account.innerText += ` ${accountHash}`;
-    }
+
+      setTimeout(() => {
+        window.location.replace("http://localhost:8000/main.html");
+        alert('Account connected!');
+      }, 1000);
+    };
   }
 }
 
 const app = new App();
-
