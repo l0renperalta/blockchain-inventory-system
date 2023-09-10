@@ -14,7 +14,7 @@ class App {
 
       setTimeout(() => {
         window.location.replace("http://localhost:8000/main.html");
-        alert('Account connected!');
+        alert('Cuenta Conectada!');
       }, 1000);
     };
   }

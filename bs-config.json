@@ -1,6 +1,6 @@
 {
   "server": {
-    "baseDir": ["./frontend/"]
+    "baseDir": ["./frontend/", "./build/contracts"]
   },
   "port": 8000
 }
