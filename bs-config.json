@@ -1,6 +1,9 @@
 {
   "server": {
-    "baseDir": ["./frontend/", "./build/contracts"]
+    "baseDir": ["./frontend/", "./build/contracts"],
+    "routes": {
+      "/libs": "./node_modules/"
+    }
   },
   "port": 8000
 }

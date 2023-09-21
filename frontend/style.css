@@ -4,6 +4,41 @@
   font-family: "Poppins", sans-serif;
 }
 
+.loginContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginContainer > .content {
+  border: 1px solid #ccc;
+  background-color: #eee;
+  padding: 1rem 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.content > button {
+  width: 10rem;
+  border-radius: 0.5rem;
+  border: none;
+  padding: 0.5rem;
+  background-color: #0c5498;
+  color: white;
+}
+
+.content > button:hover {
+  width: 10rem;
+  border-radius: 0.5rem;
+  border: none;
+  padding: 0.5rem;
+  background-color: #2465a2;
+  color: white;
+}
+
 body {
   margin: 0px;
   padding: 0px;
@@ -17,7 +52,6 @@ body {
 }
 
 main {
-  border: 1px solid #000000;
   width: 70%;
   height: 90vh;
   margin: 0rem auto;
@@ -48,12 +82,58 @@ a {
   font-weight: 600;
 }
 
-.filters {
-  display: flex;
-}
-
 .searchBar {
   width: 100%;
-  justify-content: space-evenly;
+  height: 4rem;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #b0dcec;
+}
+.searchInput {
+  border: none;
+  padding: 0;
+}
+.searchInput::placeholder {
+  color: #0c5498;
+  background-color: #b0dcec;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.searchBar button {
+  width: 7rem;
+  border-radius: 0.5rem;
+  border: none;
+  padding: 0.5rem;
+  background-color: #0c5498;
+  color: white;
+  font-weight: bold;
+  margin: 0 2rem 0 0;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.filters > div {
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem 0 3rem 0;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  background-color: #b0dcec;
+  padding: 0.4rem 0;
+}
+
+td {
+  padding: 0.4rem 0;
+  text-align: center;
 }
