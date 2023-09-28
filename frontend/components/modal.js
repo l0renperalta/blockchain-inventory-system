@@ -1,26 +1,24 @@
 export default class Modal {
   constructor() {
-    this.modalName = document.getElementById('name');
-    this.modalForm = document.getElementById('modalForm');
-    this.modalDescription = document.getElementById('description');
-    this.modalQuantity = document.getElementById('quantity');
-    this.btn = document.getElementById('addModalBtn');
-
-    this.editModalName = document.getElementById('editName');
-    this.editModalForm = document.getElementById('editModalForm');
-    this.editModalDescription = document.getElementById('editDescription');
-    this.editModalQuantity = document.getElementById('editQuantity');
-    this.editBtn = document.getElementById('editModalBtn');
     this.productId = null;
     this.data = {};
+
+    this.addModalForm = document.getElementById('addModalForm');
+    this.addModalBtn = document.getElementById('addModalBtn');
+
+    this.editModalForm = document.getElementById('editModalForm');
+    this.editName = document.getElementById('editName');
+    this.editDescription = document.getElementById('editDescription');
+    this.editQuantity = document.getElementById('editQuantity');
+    this.editModalBtn = document.getElementById('editModalBtn');
   }
 
   modalAddHandler(callback) {
-    this.btn.onclick = () => {
-      const form = new FormData(this.modalForm);
-      this.data['name'] = form.get('name');
-      this.data['description'] = form.get('description');
-      this.data['quantity'] = form.get('quantity');
+    this.addModalBtn.onclick = () => {
+      const form = new FormData(this.addModalForm);
+      this.data['name'] = form.get('addName');
+      this.data['description'] = form.get('addDescription');
+      this.data['quantity'] = Number(form.get('addQuantity'));
       callback(this.data);
     };
   }
@@ -28,13 +26,13 @@ export default class Modal {
   setValues(productValues) {
     $('#editModal').modal('toggle');
     this.productId = productValues['0'].toNumber();
-    this.editModalName.value = productValues['1'];
-    this.editModalDescription.value = productValues['2'];
-    this.editModalQuantity.value = productValues['3'].toNumber();
+    this.editName.value = productValues['1'];
+    this.editDescription.value = productValues['2'];
+    this.editQuantity.value = productValues['3'].toNumber();
   }
 
   editProduct(callback) {
-    this.editBtn.onclick = () => {
+    this.editModalBtn.onclick = () => {
       const form = new FormData(this.editModalForm);
       callback(this.productId, Number(form.get('editQuantity')));
     };

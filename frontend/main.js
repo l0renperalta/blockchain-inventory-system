@@ -72,16 +72,13 @@ class App {
   }
 
   async addNewProduct(data) {
-    console.log(data);
-    await this.productsContract.addProduct(data.nombre, data.descripcion, data.cantidad, {
-      from: this.account,
-    });
+    const { name, description, quantity } = data;
+    await this.productsContract.addProduct(name, description, quantity, { from: this.account });
     location.reload();
   }
 
   async decreaseProductQuantity(_id, _quantity) {
-    // console.log(_id, _quantity);
-    this.productsContract.decreaseProductQuantity(_id, _quantity, { from: this.account });
+    await this.productsContract.decreaseProductQuantity(_id, _quantity, { from: this.account });
   }
 }
 

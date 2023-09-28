@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@truffle/contract": "^4.6.29",
+    "@truffle/contract": "^4.6.31",
     "lite-server": "^2.6.1"
   }
 }
