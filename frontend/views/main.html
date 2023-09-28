@@ -15,7 +15,7 @@
   <body>
     <div
       class="modal fade"
-      id="myModal"
+      id="addModal"
       tabindex="-1"
       role="dialog"
       aria-labelledby="exampleModalLabel"
@@ -33,21 +33,67 @@
             <form id="modalForm">
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Nombre:</label>
-                <input type="text" class="form-control" name="nombre" />
+                <input type="text" class="form-control" name="name" id="name" />
               </div>
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Descripcion:</label>
-                <input type="text" class="form-control" name="descripcion" />
+                <input type="text" class="form-control" name="description" id="description" />
               </div>
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Cantidad:</label>
-                <input type="number" class="form-control" name="cantidad" />
+                <input type="number" class="form-control" name="quantity" id="quantity" />
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary" id="modalBtn">Agregar</button>
+            <button type="button" class="btn btn-primary" id="addModalBtn">Agregar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="editModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Editar producto</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="editModalForm">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Nombre:</label>
+                <input type="text" class="form-control" name="editName" id="editName" disabled />
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Descripcion:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="editDescription"
+                  id="editDescription"
+                  disabled
+                />
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Cantidad:</label>
+                <input type="number" class="form-control" name="editQuantity" id="editQuantity" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" id="editModalBtn">Agregar</button>
           </div>
         </div>
       </div>
@@ -63,7 +109,7 @@
             </li>
             <li><a href="">Categorias</a></li>
             <li><a href="">Transparencia</a></li>
-            <li><a href="">Salir</a></li>
+            <li><a href="/">Salir</a></li>
           </ul>
         </nav>
       </header>

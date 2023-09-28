@@ -46,6 +46,10 @@ contract ProductsContract {
     emit ProductDecreased(_id, _quantity); 
   }
 
+  function deleteProduct(uint _id) public {
+    delete products[msg.sender][_id];
+  }
+
   function getProduct(uint _id) public view returns (uint, string memory, string memory, uint, uint) {
     require(_id < productsCounter[msg.sender], 'Product not found!');
     Product storage product = products[msg.sender][_id];

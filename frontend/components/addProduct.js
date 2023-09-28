@@ -1,1 +1,3 @@
-export default class addProduct {}
+export default class addProduct {
+  constructor() {}
+}
