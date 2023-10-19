@@ -18,13 +18,13 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Agregar nuevo producto</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Agregar nueva categoria</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <form id="addModalForm">
+            <form id="addCategoryForm">
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Nombre:</label>
                 <input type="text" class="form-control" name="addName" id="addName" />
@@ -32,10 +32,6 @@
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Descripcion:</label>
                 <input type="text" class="form-control" name="addDescription" id="addDescription" />
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">Stock:</label>
-                <input type="number" class="form-control" name="addQuantity" id="addQuantity" />
               </div>
             </form>
           </div>
@@ -52,7 +48,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar producto</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Editar categoria</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -66,10 +62,6 @@
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Descripcion:</label>
                 <input type="text" class="form-control" name="editDescription" id="editDescription" disabled />
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">Stock:</label>
-                <input type="number" class="form-control" name="editQuantity" id="editQuantity" />
               </div>
             </form>
           </div>
@@ -129,7 +121,7 @@
           </div>
         </div>
         <div class="products">
-          <table id="productsTable">
+          <table id="categoriesTable">
             <thead>
               <tr>
                 <th>Nombre</th>
