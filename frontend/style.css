@@ -1,12 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
 * {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .loginContainer {
   width: 100vw;
-  height: 100vh;
+  height: 85vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,32 +54,38 @@ body {
 main {
   width: 70%;
   height: 90vh;
-  margin: 0rem auto;
+  margin: 2rem auto;
 }
 
 nav {
+  background-color: #0c5498;
+  color: #ffffff;
+  height: 5rem;
+  padding: 0 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #0c5498;
-  color: #ffffff;
-  padding: 0rem 1rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 ul {
+  margin: 0;
   display: flex;
+  list-style-type: none;
 }
 
-ul > li {
-  list-style-type: none;
-  margin: 0px 0rem;
-  padding: 0rem 0.5rem;
+ul li {
+  padding: 0 0.5rem;
 }
 
 a {
   color: #ffffff;
   text-decoration: none;
   font-weight: 600;
+}
+
+a:hover {
+  color: #ccc;
 }
 
 .searchBar {
@@ -114,14 +120,20 @@ a {
 .filters {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin: 1rem 0;
 }
 
 .filters > div {
   font-weight: bold;
+  align-items: start;
   display: flex;
   flex-direction: column;
-  align-items: center;
   margin: 1rem 0 3rem 0;
+}
+
+.filters label {
+  padding-bottom: 1rem;
 }
 
 table {

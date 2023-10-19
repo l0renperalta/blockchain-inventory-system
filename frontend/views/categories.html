@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Municipalidad Distrital de Huambo</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link href="../style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Add Modal -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Agregar nuevo producto</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="addModalForm">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Nombre:</label>
+                <input type="text" class="form-control" name="addName" id="addName" />
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Descripcion:</label>
+                <input type="text" class="form-control" name="addDescription" id="addDescription" />
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Stock:</label>
+                <input type="number" class="form-control" name="addQuantity" id="addQuantity" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" id="addModalBtn">Agregar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Editar producto</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="editModalForm">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Nombre:</label>
+                <input type="text" class="form-control" name="editName" id="editName" disabled />
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Descripcion:</label>
+                <input type="text" class="form-control" name="editDescription" id="editDescription" disabled />
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Stock:</label>
+                <input type="number" class="form-control" name="editQuantity" id="editQuantity" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" id="editModalBtn">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <header>
+        <nav>
+          <div>
+            <h4>Municipalidad de Huambo</h4>
+          </div>
+          <ul>
+            <li>
+              <a href="/views/products.html">Productos</a>
+            </li>
+            <li><a href="/views/categories.html">Categorias</a></li>
+            <li><a href="">Transparencia</a></li>
+            <li><a href="/" id="logoutBtn">Salir</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main>
+        <div class="searchBar">
+          <div style="margin-left: 2rem">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" style="color: #0c4598">
+              <path
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+              />
+            </svg>
+            <input type="text" name="search" value="" placeholder="Consultar Categorias" class="searchInput" />
+          </div>
+          <div>
+            <button type="button" id="addBtn" style="display: flex; align-items: center; justify-content: center; gap: 0.4rem">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+              </svg>
+              Agregar
+            </button>
+          </div>
+        </div>
+        <div class="filters">
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Filtrar por codigo o nombre</label>
+            <input type="text" class="form-control" id="inputFilter" placeholder="nombre o codigo" />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Filtrar por categoria</label>
+            <select class="form-control" id="categoriesSelect"></select>
+          </div>
+        </div>
+        <div class="products">
+          <table id="productsTable">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Products render by js here -->
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <script src=".././libs/@truffle/contract/browser-dist/truffle-contract.min.js"></script>
+    <script src="../categories.js" type="module"></script>
+  </body>
+</html>

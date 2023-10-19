@@ -19,6 +19,7 @@ export default class Modal {
       this.data['name'] = form.get('addName');
       this.data['description'] = form.get('addDescription');
       this.data['quantity'] = Number(form.get('addQuantity'));
+      this.data['category'] = form.get('addCategory');
       callback(this.data);
     };
   }

@@ -34,7 +34,11 @@
                 <input type="text" class="form-control" name="addDescription" id="addDescription" />
               </div>
               <div class="form-group">
-                <label for="message-text" class="col-form-label">Cantidad:</label>
+                <label for="message-text" class="col-form-label">Descripcion:</label>
+                <select class="form-control" name="addCategory" id="categoriesSelect"></select>
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Stock:</label>
                 <input type="number" class="form-control" name="addQuantity" id="addQuantity" />
               </div>
             </form>
@@ -47,6 +51,7 @@
       </div>
     </div>
 
+    <!-- Edit Modal -->
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -67,7 +72,7 @@
                 <input type="text" class="form-control" name="editDescription" id="editDescription" disabled />
               </div>
               <div class="form-group">
-                <label for="message-text" class="col-form-label">Cantidad:</label>
+                <label for="message-text" class="col-form-label">Stock:</label>
                 <input type="number" class="form-control" name="editQuantity" id="editQuantity" />
               </div>
             </form>
@@ -83,14 +88,16 @@
     <div class="container">
       <header>
         <nav>
-          <h3>Municipalidad de Huambo</h3>
+          <div>
+            <h4>Municipalidad de Huambo</h4>
+          </div>
           <ul>
             <li>
-              <a href="">Productos</a>
+              <a href="/views/products.html">Productos</a>
             </li>
-            <li><a href="">Categorias</a></li>
+            <li><a href="/views/categories.html">Categorias</a></li>
             <li><a href="">Transparencia</a></li>
-            <li><a href="/">Salir</a></li>
+            <li><a href="/" id="logoutBtn">Salir</a></li>
           </ul>
         </nav>
       </header>
@@ -116,15 +123,13 @@
           </div>
         </div>
         <div class="filters">
-          <div>
-            <p>Filtrar por codigo o nombre</p>
-            <input type="text" name="" value="" />
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Filtrar por codigo o nombre</label>
+            <input type="text" class="form-control" id="inputFilter" placeholder="nombre o codigo" />
           </div>
-          <div>
-            <p>Filtrar por categoria</p>
-            <select>
-              <option value="">Accesorios</option>
-            </select>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Filtrar por categoria</label>
+            <select class="form-control" id="categoriesSelect"></select>
           </div>
         </div>
         <div class="products">
@@ -133,7 +138,8 @@
               <tr>
                 <th>Nombre</th>
                 <th>Descripcion</th>
-                <th>Cantidad</th>
+                <th>Stock</th>
+                <th>Categoria</th>
                 <th>Acciones</th>
               </tr>
             </thead>

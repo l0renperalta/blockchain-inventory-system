@@ -14,7 +14,7 @@ class Login {
       // account.innerText += ` ${accountHash}`;
 
       setTimeout(() => {
-        window.location.replace('http://localhost:8000/views/main.html');
+        window.location.replace('http://localhost:8000/views/products.html');
         alert('Cuenta Conectada!');
       }, 1000);
     };
