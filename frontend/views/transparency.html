@@ -13,66 +13,6 @@
     <link href="../style.css" rel="stylesheet" />
   </head>
   <body>
-    <!-- Add Modal -->
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Agregar nueva categoria</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form id="addCategoryForm">
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Nombre:</label>
-                <input type="text" class="form-control" name="addName" id="addName" />
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">Descripcion:</label>
-                <input type="text" class="form-control" name="addDescription" id="addDescription" />
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary" id="addModalBtn">Agregar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Edit Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar categoria</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form id="editModalForm">
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Nombre:</label>
-                <input type="text" class="form-control" name="editName" id="editName" disabled />
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">Descripcion:</label>
-                <input type="text" class="form-control" name="editDescription" id="editDescription" disabled />
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary" id="editModalBtn">Guardar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="container">
       <header>
         <nav>
@@ -92,20 +32,22 @@
 
       <main>
         <div class="products">
-          <h2 class="mb-5">Transactions</h2>
-          <table id="transactionsTable">
-            <thead>
-              <tr>
-                <th scope="row">Transaccion Hash</th>
-                <th scope="row">Metodo</th>
-                <th scope="row">Bloque</th>
-                <th scope="row">Tiempo</th>
-                <th scope="row">From</th>
-                <th scope="row">To</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
+          <h2 class="mb-5">Transacciones</h2>
+          <div class="table-wrapper-scroll-y my-custom-scrollbar">
+            <table id="transactionsTable">
+              <thead>
+                <tr>
+                  <th scope="row">Transaccion Hash</th>
+                  <th scope="row">Metodo</th>
+                  <th scope="row">Bloque</th>
+                  <th scope="row">Fecha</th>
+                  <th scope="row">Desde</th>
+                  <th scope="row">Hacia</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
         </div>
       </main>
     </div>

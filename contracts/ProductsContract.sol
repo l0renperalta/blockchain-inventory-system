@@ -32,6 +32,10 @@ contract ProductsContract {
     uint id, string categoryName, string categoryDescription, uint quantity
   );
 
+  event CategoryEdited ( 
+    uint id, string categoryName, string categoryDescription
+  );
+
   mapping (address => mapping(uint => Product)) public products;
   mapping (address => mapping(uint => Category)) public categories;
   mapping (address => uint) public productsCounter;
@@ -60,6 +64,14 @@ contract ProductsContract {
     product.quantity -= _quantity;
     products[msg.sender][_id] = product;
     emit ProductEdited(_id, _productName, _productDescription, _quantity); 
+  }
+
+  function editCategory(uint _id, string memory _categoryName, string memory _categoryDescription) public {
+    Category memory category = categories[msg.sender][_id];
+    category.categoryName = _categoryName;
+    category.categoryDescription = _categoryDescription;
+    categories[msg.sender][_id] = category;
+    emit CategoryEdited(_id, _categoryName, _categoryDescription); 
   }
 
   function deleteProduct(uint _id) public {

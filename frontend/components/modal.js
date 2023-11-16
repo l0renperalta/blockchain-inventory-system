@@ -26,14 +26,17 @@ export default class Modal {
     };
   }
 
-  setValues(productValues) {
+  setValues(values) {
+    console.log(values);
     $('#editModal').modal('toggle');
-    this.editId.value = productValues[0].toNumber();
-    this.editName.value = productValues['1'];
-    this.editDescription.value = productValues['2'];
-    // this.editQuantity.value = productValues['3'].toNumber();
-    this.totalStock.innerText = `Stock total: ${productValues['3'].toNumber()}`;
-    this.totalStock.style.fontStyle = 'italic';
+    this.editId.value = values[0].toNumber();
+    this.editName.value = values['1'];
+    this.editDescription.value = values['2'];
+    // // this.editQuantity.value = values['3'].toNumber();
+    if (values[3]) {
+      this.totalStock.innerText = `Stock total: ${values['3'].toNumber()}`;
+      this.totalStock.style.fontStyle = 'italic';
+    }
   }
 
   handleModalEdit(callback) {

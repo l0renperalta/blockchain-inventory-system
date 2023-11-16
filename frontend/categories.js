@@ -12,6 +12,7 @@ class Categories {
 
     this.modal = new Modal('addCategoryForm');
     this.modal.modalAddHandler((data) => this.addNewCategory(data));
+    this.modal.handleModalEdit((data) => this.handleEditCategory(data));
 
     this.logoutBtn = document.getElementById('logoutBtn');
     this.logoutBtn.onclick = async () => {
@@ -29,21 +30,25 @@ class Categories {
     const productsContract = TruffleContract(data);
     productsContract.setProvider(this.web3Provider);
     this.productsContract = await productsContract.deployed();
-    this.setProducts();
+    this.renderContractData();
   }
 
-  async setProducts() {
-    let counter = await this.productsContract.categoriesCounter(this.account);
-    for (let i = 0; i < counter.toNumber(); i++) {
+  async renderContractData() {
+    await this.fetchCategories();
+    this.renderCategories(this.categories);
+  }
+
+  async fetchCategories() {
+    const categoriesCounter = await this.productsContract.categoriesCounter(this.account);
+    for (let i = 0; i < Number(categoriesCounter); i++) {
       this.categories.push(await this.productsContract.categories(this.account, i));
     }
-    console.log(this.categories);
-    this.renderCategories();
   }
 
-  renderCategories() {
+  renderCategories(categories) {
+    console.log(categories);
     const table = document.getElementById('categoriesTable');
-    this.categories.map((c) => {
+    categories.map((c) => {
       const row = table.insertRow();
       row.innerHTML = `
         <tr>
@@ -80,6 +85,27 @@ class Categories {
     const transactionData = await this.productsContract.addCategory(name, description, { from: this.account });
     console.log(transactionData);
     location.reload();
+  }
+
+  async handleEditCategory(data) {
+    const { id, name, description } = data;
+    const transactionData = await this.productsContract.editCategory(id, name, description, { from: this.account });
+    this.handleLocalStoredTransactions(transactionData);
+    location.reload();
+  }
+
+  handleLocalStoredTransactions(transactionData) {
+    const newTransaction = {
+      tx: transactionData.tx,
+      blockHash: transactionData.receipt.blockHash,
+      from: transactionData.receipt.from,
+      to: transactionData.receipt.to,
+      blockNumber: transactionData.receipt.blockNumber,
+      timestamps: Number(transactionData.logs[0].args['4']),
+    };
+    const storedTransactions = JSON.parse(localStorage.getItem('txs')) === null ? [] : JSON.parse(localStorage.getItem('txs'));
+    storedTransactions.push(newTransaction);
+    localStorage.setItem('txs', JSON.stringify(storedTransactions));
   }
 }
 

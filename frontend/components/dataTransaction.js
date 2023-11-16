@@ -23,6 +23,7 @@ class DataTransaction {
       <ul class="list-group list-group-flush">
         <li class="list-group-item py-4">${this.txData.tx}</li>
         <li class="list-group-item py-4">${this.txData.blockHash}</li>
+        <li class="list-group-item py-4"><button class="btn btn-outline-success" disabled style="fontWeight: 800">Success</button></li>
         <li class="list-group-item py-4">${this.txData.blockNumber}</li>
         <li class="list-group-item py-4">${this.parseToLocalDate(this.txData.timestamps)}</li>
         <li class="list-group-item py-4">${this.txData.from}</li>

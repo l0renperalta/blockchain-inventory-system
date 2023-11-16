@@ -53,7 +53,7 @@ body {
 
 main {
   width: 70%;
-  height: 90vh;
+  height: 80vh;
   margin: 2rem auto;
 }
 
@@ -119,8 +119,9 @@ a:hover {
 
 .filters {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr 0.5fr;
   gap: 2rem;
+  align-items: end;
   margin: 1rem 0;
 }
 
@@ -153,4 +154,28 @@ td {
 
 #transactionsTable thead {
   background-color: #b0dcec; /* Color de fondo para la cabecera */
+}
+
+.my-custom-scrollbar {
+  position: relative;
+  height: 650px;
+  overflow: auto;
+}
+.table-wrapper-scroll-y {
+  display: block;
+}
+
+.filterButton {
+  width: 7rem;
+  border-radius: 0.5rem;
+  border: none;
+  padding: 0.5rem;
+  background-color: #0c5498;
+  color: white;
+  font-weight: bold;
+  margin: 0 2rem 0 0;
+}
+
+.txDetail {
+  font-weight: 900;
 }

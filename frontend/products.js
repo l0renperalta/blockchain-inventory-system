@@ -14,12 +14,11 @@ class Products {
     this.addBtn.onclick = () => $('#addModal').modal('toggle');
 
     this.modal = new Modal('addProductForm');
-    this.modal.modalAddHandler((data) => this.addNewProduct(data));
+    this.modal.modalAddHandler((data) => this.handleAddNewProduct(data));
     this.modal.handleModalEdit((data) => this.handleEditProduct(data));
 
-    this.table = new Table(this.categories);
-
-    this.filters = new Filters(this.categories);
+    this.table = new Table();
+    this.filters = new Filters();
 
     this.logoutBtn = document.getElementById('logoutBtn');
     this.logoutBtn.onclick = async () => {
@@ -38,48 +37,54 @@ class Products {
     productsContract.setProvider(this.web3Provider);
     this.productsContract = await productsContract.deployed();
 
-    // Espera a que setCategories() se complete antes de continuar
-    await this.setCategories();
-
-    // Ahora puedes realizar operaciones que dependan de las categorías
-    await this.setProducts();
+    await this.renderContractData();
   }
 
-  async setProducts() {
-    let counter = await this.productsContract.productsCounter(this.account);
-    for (let i = 0; i < counter.toNumber(); i++) {
+  async renderContractData() {
+    await this.fetchProducts();
+    await this.fetchCategories();
+
+    this.table.renderProducts(this.products, this.categories);
+    this.renderFilterOptions('filterCategories');
+    this.renderFilterOptions('categoriesSelect');
+  }
+
+  async fetchProducts() {
+    const productsCounter = await this.productsContract.productsCounter(this.account);
+    for (let i = 0; i < Number(productsCounter); i++) {
       this.products.push(await this.productsContract.products(this.account, i));
     }
-
-    this.table.renderProducts(this.products);
   }
 
-  async setCategories() {
-    const categoriesSelect = document.getElementById('categoriesSelect');
-    const counter = await this.productsContract.categoriesCounter(this.account);
-    const counterValue = counter.toNumber();
+  async fetchCategories() {
+    const categoriesCounter = await this.productsContract.categoriesCounter(this.account);
+    for (let i = 0; i < Number(categoriesCounter); i++) {
+      this.categories.push(await this.productsContract.categories(this.account, i));
+    }
+  }
 
-    const categoryPromises = Array.from({ length: counterValue }, async (_, i) => {
-      const categoryElement = await this.productsContract.categories(this.account, i);
-      return { id: categoryElement[0].toNumber(), title: categoryElement[1] };
-    });
-
-    const categories = await Promise.all(categoryPromises);
-
-    categories.forEach((category) => {
+  renderFilterOptions(elementId) {
+    const filterElement = document.getElementById(elementId);
+    for (let i = 0; i < this.categories.length; i++) {
       const option = document.createElement('option');
-      option.innerText = category.title;
-      option.setAttribute('id', category.id);
-      categoriesSelect.append(option);
-    });
-
-    this.categories = categories;
+      option.innerText = this.categories[i][1];
+      option.setAttribute('id', Number(this.categories[i][0]));
+      filterElement.append(option);
+    }
   }
 
-  async addNewProduct(data) {
+  async handleAddNewProduct(data) {
     const { name, description, quantity, category } = data;
-    let categorySelected = this.categories.find((c) => c.title === category);
-    const transactionData = await this.productsContract.addProduct(name, description, quantity, categorySelected.id, { from: this.account });
+    let categorySelected = this.categories.find((c) => c[1] === category);
+    const transactionData = await this.productsContract.addProduct(name, description, quantity, Number(categorySelected[0]), { from: this.account });
+    this.handleLocalStoredTransactions(transactionData);
+    location.reload();
+  }
+
+  async handleEditProduct(data) {
+    const { id, name, description, quantity } = data;
+    console.log(id, name, description, quantity);
+    const transactionData = await this.productsContract.editProduct(id, name, description, quantity, { from: this.account });
     this.handleLocalStoredTransactions(transactionData);
     location.reload();
   }
@@ -96,14 +101,6 @@ class Products {
     const storedTransactions = JSON.parse(localStorage.getItem('txs')) === null ? [] : JSON.parse(localStorage.getItem('txs'));
     storedTransactions.push(newTransaction);
     localStorage.setItem('txs', JSON.stringify(storedTransactions));
-  }
-
-  async handleEditProduct(data) {
-    const { id, name, description, quantity } = data;
-    console.log(id, name, description, quantity);
-    const transactionData = await this.productsContract.editProduct(id, name, description, quantity, { from: this.account });
-    this.handleLocalStoredTransactions(transactionData);
-    location.reload();
   }
 }
 

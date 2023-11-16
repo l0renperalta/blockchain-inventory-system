@@ -1,23 +1,21 @@
 import Modal from './modal.js';
 
 export default class Table {
-  constructor(categories) {
+  constructor() {
     this.modal = new Modal('editModal');
 
     this.table = document.getElementById('productsTable');
-    this.categories = categories;
   }
 
-  renderProducts(products) {
+  renderProducts(products, categories) {
     products.map((p) => {
-      // this.findCategoryById(p[5].toNumber());
       const row = this.table.insertRow();
       row.innerHTML = `
             <tr>
               <td>${p[1]}</td>
               <td>${p[2]}</td>
-              <td>${p[3].toNumber()}</td>
-              <td>${p[5].toNumber()}</td>
+              <td>${Number(p[3])}</td>
+              <td>${this.findCategoryById(categories, Number(p[5]))}</td>
               <td style="display: flex; justify-content: space-evenly;">
                 
               </td>
@@ -44,7 +42,8 @@ export default class Table {
     });
   }
 
-  findCategoryById(_id) {
-    return this.categories[_id][1];
+  findCategoryById(categories, id) {
+    const c = categories.find((c) => Number(c[0]) === id);
+    return c[1];
   }
 }
