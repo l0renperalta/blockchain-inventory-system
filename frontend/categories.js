@@ -12,7 +12,6 @@ class Categories {
 
     this.modal = new Modal('addCategoryForm');
     this.modal.modalAddHandler((data) => this.addNewCategory(data));
-    this.modal.editProduct((_id, _quantity) => this.decreaseProductQuantity(_id, _quantity));
 
     this.logoutBtn = document.getElementById('logoutBtn');
     this.logoutBtn.onclick = async () => {
@@ -40,19 +39,6 @@ class Categories {
     }
     console.log(this.categories);
     this.renderCategories();
-  }
-
-  async setCategories() {
-    const categoriesSelect = document.getElementById('categoriesSelect');
-    let counter = await this.productsContract.categoriesCounter(this.account);
-    for (let i = 0; i < counter.toNumber(); i++) {
-      const categoryElement = await this.productsContract.categories(this.account, i);
-      const option = document.createElement('option');
-      option.innerText = categoryElement[1];
-      option.setAttribute('id', categoryElement[0].toNumber());
-      categoriesSelect.append(option);
-      this.categories.push(categoryElement);
-    }
   }
 
   renderCategories() {
@@ -91,7 +77,8 @@ class Categories {
 
   async addNewCategory(data) {
     const { name, description } = data;
-    await this.productsContract.addCategory(name, description, { from: this.account });
+    const transactionData = await this.productsContract.addCategory(name, description, { from: this.account });
+    console.log(transactionData);
     location.reload();
   }
 }

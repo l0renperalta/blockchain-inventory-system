@@ -18,13 +18,13 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Agregar nuevo producto</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Agregar nueva categoria</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <form id="addProductForm">
+            <form id="addCategoryForm">
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Nombre:</label>
                 <input type="text" class="form-control" name="addName" id="addName" />
@@ -32,14 +32,6 @@
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Descripcion:</label>
                 <input type="text" class="form-control" name="addDescription" id="addDescription" />
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">Categoria:</label>
-                <select class="form-control" name="addCategory" id="categoriesSelect"></select>
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">Stock:</label>
-                <input type="number" class="form-control" name="addQuantity" id="addQuantity" />
               </div>
             </form>
           </div>
@@ -56,7 +48,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Registro de Salida</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Editar categoria</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -64,21 +56,12 @@
           <div class="modal-body">
             <form id="editModalForm">
               <div class="form-group">
-                <label for="recipient-name" class="col-form-label">id:</label>
-                <input type="text" class="form-control" name="editId" id="editId" disabled />
-              </div>
-              <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Nombre:</label>
-                <input type="text" class="form-control" name="editName" id="editName" />
+                <input type="text" class="form-control" name="editName" id="editName" disabled />
               </div>
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Descripcion:</label>
-                <input type="text" class="form-control" name="editDescription" id="editDescription" />
-              </div>
-              <div class="form-group">
-                <label for="message-text" class="col-form-label">Stock:</label>
-                <input type="number" class="form-control" name="editQuantity" id="editQuantity" />
-                <label id="totalStock"></label>
+                <input type="text" class="form-control" name="editDescription" id="editDescription" disabled />
               </div>
             </form>
           </div>
@@ -108,50 +91,21 @@
       </header>
 
       <main>
-        <div class="searchBar">
-          <div style="margin-left: 2rem">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" style="color: #0c4598">
-              <path
-                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
-              />
-            </svg>
-            <input type="text" name="search" value="" placeholder="Consultar Inventario" class="searchInput" />
-          </div>
-          <div>
-            <button type="button" id="addBtn" style="display: flex; align-items: center; justify-content: center; gap: 0.4rem">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-              </svg>
-              Agregar
-            </button>
-          </div>
-        </div>
-        <div class="filters">
-          <div class="form-group">
-            <label for="exampleFormControlInput1">Filtrar por codigo o nombre</label>
-            <input type="text" class="form-control" id="inputFilter" placeholder="nombre o codigo" />
-          </div>
-          <div class="form-group">
-            <label for="exampleFormControlSelect1">Filtrar por categoria</label>
-            <select class="form-control" id="filterCategories"></select>
-          </div>
-        </div>
         <div class="products">
-          <table id="productsTable">
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Descripcion</th>
-                <th>Stock</th>
-                <th>Categoria</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Products render by js here -->
-            </tbody>
-          </table>
+          <h2 class="mb-5">Transaction Detail</h2>
+          <div class="row">
+            <div class="col">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item py-4">Transaccion Hash</li>
+                <li class="list-group-item py-4">Metodo</li>
+                <li class="list-group-item py-4">Bloque</li>
+                <li class="list-group-item py-4">Tiempo</li>
+                <li class="list-group-item py-4">From</li>
+                <li class="list-group-item py-4">To</li>
+              </ul>
+            </div>
+            <div class="col" id="transactionDetail"></div>
+          </div>
         </div>
       </main>
     </div>
@@ -162,6 +116,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
     <script src=".././libs/@truffle/contract/browser-dist/truffle-contract.min.js"></script>
-    <script src="../products.js" type="module"></script>
+    <script src="../components/dataTransaction.js" type="module"></script>
   </body>
 </html>

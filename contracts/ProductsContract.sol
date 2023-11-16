@@ -28,8 +28,8 @@ contract ProductsContract {
     uint id, string categoryName, string categoryDescription
   );
 
-  event ProductDecreased ( 
-    uint id, uint quantity
+  event ProductEdited ( 
+    uint id, string categoryName, string categoryDescription, uint quantity
   );
 
   mapping (address => mapping(uint => Product)) public products;
@@ -53,11 +53,13 @@ contract ProductsContract {
     categoriesCounter[msg.sender]++;
   }
 
-  function decreaseProductQuantity(uint _id, uint _quantity) public {
+  function editProduct(uint _id, string memory _productName, string memory _productDescription, uint _quantity) public {
     Product memory product = products[msg.sender][_id];
+    product.productName = _productName;
+    product.productDescription = _productDescription;
     product.quantity -= _quantity;
     products[msg.sender][_id] = product;
-    emit ProductDecreased(_id, _quantity); 
+    emit ProductEdited(_id, _productName, _productDescription, _quantity); 
   }
 
   function deleteProduct(uint _id) public {

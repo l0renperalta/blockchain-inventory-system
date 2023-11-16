@@ -1,19 +1,23 @@
+import Modal from './modal.js';
+
 export default class Table {
-  constructor(_categories) {
+  constructor(categories) {
+    this.modal = new Modal('editModal');
+
     this.table = document.getElementById('productsTable');
-    this.categories = _categories;
+    this.categories = categories;
   }
 
   renderProducts(products) {
     products.map((p) => {
-      this.findCategoryById(p[5].toNumber());
+      // this.findCategoryById(p[5].toNumber());
       const row = this.table.insertRow();
       row.innerHTML = `
             <tr>
               <td>${p[1]}</td>
               <td>${p[2]}</td>
               <td>${p[3].toNumber()}</td>
-              <td>${this.findCategoryById(p[5].toNumber())}</td>
+              <td>${p[5].toNumber()}</td>
               <td style="display: flex; justify-content: space-evenly;">
                 
               </td>

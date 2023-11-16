@@ -142,11 +142,15 @@ table {
 
 th {
   background-color: #b0dcec;
-  padding: 0.4rem 0;
+  padding: 0.8rem 0;
   text-align: center;
 }
 
 td {
-  padding: 0.4rem 0;
+  padding: 0.8rem 0;
   text-align: center;
+}
+
+#transactionsTable thead {
+  background-color: #b0dcec; /* Color de fondo para la cabecera */
 }
