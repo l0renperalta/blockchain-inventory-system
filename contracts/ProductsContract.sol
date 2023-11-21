@@ -12,28 +12,30 @@ contract ProductsContract {
     uint quantity;
     uint createdAt;
     uint categoryId;
+    string productOutput;
   }
 
   struct Category {
     uint id;
     string categoryName;
     string categoryDescription;
+    uint createdAt;
   }
 
   event ProductCreated (
-    uint id, string productName, string productDescription, uint quantity, uint createdAt, uint productCategory
+    uint id, string productName, string productDescription, uint quantity, uint createdAt, uint productCategory, string productOutput
   );
 
   event CategoryCreated(
-    uint id, string categoryName, string categoryDescription
+    uint id, string categoryName, string categoryDescription, uint createdAt
   );
 
   event ProductEdited ( 
-    uint id, string categoryName, string categoryDescription, uint quantity
+    uint id, string categoryName, string categoryDescription, uint quantity, uint createdAt, string productOutput
   );
 
   event CategoryEdited ( 
-    uint id, string categoryName, string categoryDescription
+    uint id, string categoryName, string categoryDescription, uint createdAt
   );
 
   mapping (address => mapping(uint => Product)) public products;
@@ -41,29 +43,29 @@ contract ProductsContract {
   mapping (address => uint) public productsCounter;
   mapping (address => uint) public categoriesCounter;
 
-  function addProduct(string memory _productName, string memory _productDescription, uint _quantity, uint _categoryId) public {
+  function addProduct(string memory _productName, string memory _productDescription, uint _quantity, uint _categoryId, string memory _productOutput) public {
     require(_categoryId < categoriesCounter[msg.sender], 'Category not found!');
     
     uint counter = productsCounter[msg.sender];
-    products[msg.sender][counter] = Product(counter, _productName, _productDescription, _quantity, block.timestamp, _categoryId);
-    emit ProductCreated(counter, _productName, _productDescription, _quantity, block.timestamp, _categoryId);
+    products[msg.sender][counter] = Product(counter, _productName, _productDescription, _quantity, block.timestamp, _categoryId, _productOutput);
+    emit ProductCreated(counter, _productName, _productDescription, _quantity, block.timestamp, _categoryId, _productOutput);
     productsCounter[msg.sender]++;
   }
 
   function addCategory(string memory _name, string memory _description) public {
     uint counter = categoriesCounter[msg.sender];
-    categories[msg.sender][counter] = Category(counter, _name, _description);
-    emit CategoryCreated(counter, _name, _description);    
+    categories[msg.sender][counter] = Category(counter, _name, _description,  block.timestamp);
+    emit CategoryCreated(counter, _name, _description, block.timestamp);    
     categoriesCounter[msg.sender]++;
   }
 
-  function editProduct(uint _id, string memory _productName, string memory _productDescription, uint _quantity) public {
+  function editProduct(uint _id, string memory _productName, string memory _productDescription, uint _quantity, string memory _productOutput) public {
     Product memory product = products[msg.sender][_id];
     product.productName = _productName;
     product.productDescription = _productDescription;
     product.quantity -= _quantity;
     products[msg.sender][_id] = product;
-    emit ProductEdited(_id, _productName, _productDescription, _quantity); 
+    emit ProductEdited(_id, _productName, _productDescription, _quantity, block.timestamp, _productOutput); 
   }
 
   function editCategory(uint _id, string memory _categoryName, string memory _categoryDescription) public {
@@ -71,7 +73,7 @@ contract ProductsContract {
     category.categoryName = _categoryName;
     category.categoryDescription = _categoryDescription;
     categories[msg.sender][_id] = category;
-    emit CategoryEdited(_id, _categoryName, _categoryDescription); 
+    emit CategoryEdited(_id, _categoryName, _categoryDescription, block.timestamp); 
   }
 
   function deleteProduct(uint _id) public {

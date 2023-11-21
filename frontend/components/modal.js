@@ -1,30 +1,61 @@
 export default class Modal {
-  constructor(formId) {
+  constructor() {
     this.productId = null;
     this.data = {};
 
-    this.addModalForm = document.getElementById(formId);
-    this.addModalBtn = document.getElementById('addModalBtn');
+    // this.formId = document.getElementById(formId);
+    // this.addBtnId = document.getElementById(addBtnId);
 
-    this.editModalForm = document.getElementById('editModalForm');
-    this.editModalBtn = document.getElementById('editModalBtn');
-    this.editId = document.getElementById('editId');
-    this.editName = document.getElementById('editName');
-    this.editDescription = document.getElementById('editDescription');
-    this.editQuantity = document.getElementById('editQuantity');
+    // MODAL ADD PRODUCT
+    this.productForm = document.getElementById('productForm');
+    this.addProductBtn = document.getElementById('addProductBtn');
+    this.editProductForm = document.getElementById('editProductForm');
+    this.editProductBtn = document.getElementById('editProductBtn');
+
+    this.categoryForm = document.getElementById('categoryForm');
+    this.addCategoryBtn = document.getElementById('addCategoryBtn');
+    this.editCategoryForm = document.getElementById('editCategoryForm');
+    this.editCategoryBtn = document.getElementById('editCategoryBtn');
+
+    this.editId = document.getElementById('editProductId');
+    this.editName = document.getElementById('editProductName');
+    this.editDescription = document.getElementById('editProductDescription');
     this.totalStock = document.getElementById('totalStock');
+    this.outputReason = document.getElementById('outputReason');
   }
 
-  modalAddHandler(callback) {
-    this.addModalBtn.onclick = () => {
-      const form = new FormData(this.addModalForm);
-      this.data['name'] = form.get('addName');
-      this.data['description'] = form.get('addDescription');
-      if (Number(form.get('addQuantity')) > 0) this.data['quantity'] = Number(form.get('addQuantity'));
-      if (form.get('addCategory') !== null) this.data['category'] = form.get('addCategory');
+  modalProductHandler(callback) {
+    this.addProductBtn.onclick = () => {
+      const form = new FormData(this.productForm);
+      this.data['name'] = form.get('addProductName');
+      this.data['description'] = form.get('addProductDescription');
+      this.data['quantity'] = Number(form.get('addProductQuantity'));
+      this.data['category'] = form.get('categoriesSelect');
       callback(this.data);
+      return;
     };
   }
+
+  modalCategoryHandler(callback) {
+    this.addCategoryBtn.onclick = () => {
+      const form = new FormData(this.categoryForm);
+      this.data['name'] = form.get('addCategoryName');
+      this.data['description'] = form.get('addCategoryDescription');
+      callback(this.data);
+      return;
+    };
+  }
+
+  // modalAddHandler(callback) {
+  //   this.addBtnId.onclick = () => {
+  //     const form = new FormData(this.formId);
+  //     this.data['name'] = form.get('addName');
+  //     this.data['description'] = form.get('addDescription');
+  //     if (Number(form.get('addQuantity')) > 0) this.data['quantity'] = Number(form.get('addQuantity'));
+  //     if (form.get('categoriesSelect') !== null) this.data['category'] = form.get('categoriesSelect');
+  //     callback(this.data);
+  //   };
+  // }
 
   setValues(values) {
     console.log(values);
@@ -39,14 +70,28 @@ export default class Modal {
     }
   }
 
-  handleModalEdit(callback) {
-    this.editModalBtn.onclick = () => {
-      const form = new FormData(this.editModalForm);
+  handleProductEdit(callback) {
+    this.editProductBtn.onclick = () => {
+      const form = new FormData(this.editProductForm);
       const newValues = {
         id: Number(this.editId.value),
-        name: form.get('editName'),
-        description: form.get('editDescription'),
-        quantity: Number(form.get('editQuantity')),
+        name: form.get('editProductName'),
+        description: form.get('editProductDescription'),
+        quantity: Number(form.get('editProductQuantity')),
+        outputReason: this.outputReason.value,
+      };
+
+      callback(newValues);
+    };
+  }
+
+  handleCategoryEdit(callback) {
+    this.editCategoryBtn.onclick = () => {
+      const form = new FormData(this.editCategoryForm);
+      const newValues = {
+        id: Number(this.editId.value),
+        name: form.get('editProductName'),
+        description: form.get('editProductDescription'),
       };
       callback(newValues);
     };

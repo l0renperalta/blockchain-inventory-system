@@ -7,12 +7,12 @@ class Categories {
     this.web3Provider = null;
     this.categories = [];
 
-    this.addBtn = document.getElementById('addBtn');
-    this.addBtn.onclick = () => $('#addModal').modal('toggle');
+    this.addBtn = document.getElementById('addNewCategory');
+    this.addBtn.onclick = () => $('#addCategoryModal').modal('toggle');
 
-    this.modal = new Modal('addCategoryForm');
-    this.modal.modalAddHandler((data) => this.addNewCategory(data));
-    this.modal.handleModalEdit((data) => this.handleEditCategory(data));
+    this.modal = new Modal();
+    this.modal.modalCategoryHandler((data) => this.addNewCategory(data));
+    this.modal.handleCategoryEdit((data) => this.handleEditCategory(data));
 
     this.logoutBtn = document.getElementById('logoutBtn');
     this.logoutBtn.onclick = async () => {
@@ -83,7 +83,7 @@ class Categories {
   async addNewCategory(data) {
     const { name, description } = data;
     const transactionData = await this.productsContract.addCategory(name, description, { from: this.account });
-    console.log(transactionData);
+    this.handleLocalStoredTransactions(transactionData);
     location.reload();
   }
 

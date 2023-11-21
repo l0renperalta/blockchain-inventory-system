@@ -5,17 +5,17 @@ export default class Filters {
     this.filterBtn = document.getElementById('filterBtn');
     this.table = document.getElementById('productsTable');
 
-    this.filterBtn.onclick = () => this.filter();
+    this.filterBtn.onclick = () => this.filterRows();
   }
 
-  filter() {
+  filterRows() {
     const [, ...rows] = this.table.getElementsByTagName('tr');
     for (const row of rows) {
       const name = row.children[0].innerText;
       const description = row.children[1].innerText;
       const category = row.children[3].innerText;
 
-      const optSelected = this.filterCategories.options[filterCategories.selectedIndex].value;
+      const optSelected = this.filterCategories.options[this.filterCategories.selectedIndex].value;
 
       let shouldHide = false;
 

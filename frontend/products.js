@@ -10,12 +10,12 @@ class Products {
     this.products = [];
     this.categories = [];
 
-    this.addBtn = document.getElementById('addBtn');
-    this.addBtn.onclick = () => $('#addModal').modal('toggle');
+    this.addBtn = document.getElementById('addNewProduct');
+    this.addBtn.onclick = () => $('#addProductModal').modal('toggle');
 
-    this.modal = new Modal('addProductForm');
-    this.modal.modalAddHandler((data) => this.handleAddNewProduct(data));
-    this.modal.handleModalEdit((data) => this.handleEditProduct(data));
+    this.modal = new Modal();
+    this.modal.modalProductHandler((data) => this.handleAddNewProduct(data));
+    this.modal.handleProductEdit((data) => this.handleEditProduct(data));
 
     this.table = new Table();
     this.filters = new Filters();
@@ -76,15 +76,15 @@ class Products {
   async handleAddNewProduct(data) {
     const { name, description, quantity, category } = data;
     let categorySelected = this.categories.find((c) => c[1] === category);
-    const transactionData = await this.productsContract.addProduct(name, description, quantity, Number(categorySelected[0]), { from: this.account });
+    const transactionData = await this.productsContract.addProduct(name, description, quantity, Number(categorySelected[0]), '', { from: this.account });
     this.handleLocalStoredTransactions(transactionData);
     location.reload();
   }
 
   async handleEditProduct(data) {
-    const { id, name, description, quantity } = data;
-    console.log(id, name, description, quantity);
-    const transactionData = await this.productsContract.editProduct(id, name, description, quantity, { from: this.account });
+    const { id, name, description, quantity, outputReason } = data;
+    console.log(id, name, description, quantity, outputReason);
+    const transactionData = await this.productsContract.editProduct(id, name, description, quantity, outputReason, { from: this.account });
     this.handleLocalStoredTransactions(transactionData);
     location.reload();
   }
